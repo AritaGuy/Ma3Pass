@@ -2,7 +2,7 @@ puts "Destroying old data..."
 Matatu.destroy_all
 Passenger.destroy_all
 Route.destroy_all
-Ticket.destroy_all
+Booking.destroy_all
 
 
 puts "🌱 Seeding data..."
@@ -12,6 +12,7 @@ matatu1 = Matatu.create(sacco: Faker::Company.name, reg_no: Faker::Vehicle.licen
 matatu2 = Matatu.create(sacco: Faker::Company.name, reg_no: Faker::Vehicle.license_plate)
 matatu3 = Matatu.create(sacco: Faker::Company.name, reg_no: Faker::Vehicle.license_plate)
 matatu4 = Matatu.create(sacco: Faker::Company.name, reg_no: Faker::Vehicle.license_plate)
+matatu5 = Matatu.create(sacco: Faker::Company.name, reg_no: Faker::Vehicle.license_plate)
 
 puts "Creating routes..."
 route1 = Route.create(name: "Nairobi - Nakuru", price: 300)
@@ -20,76 +21,78 @@ route3 = Route.create(name: "Nairobi - Mombasa", price: 1200)
 route4 = Route.create(name: "Nairobi - Nanyuki", price: 600)
 
 puts "Creating passengers..."
-passenger1 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: "1234")
-passenger2 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: "12345")
-passenger3 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: "123456")
-passenger4 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: "1234567")
-passenger5 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: "123")
-passenger6 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: "112")
-passenger7 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: "1122")
-passenger8 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: "112233")
-
-puts "Creating tickets..."
-# 16.times do |index|
-#   ticket"#{index+1} = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-# end
-ticket1 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket2 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket3 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket4 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket5 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket6 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket7 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket8 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket9 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket10 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
-ticket11 = Ticket.create(number: Faker::Number.decimal_part(digits: 3))
+pass1 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: Faker::Alphanumeric.alpha(number: 5))
+pass2 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: Faker::Alphanumeric.alpha(number: 5))
+pass3 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: Faker::Alphanumeric.alpha(number: 5))
+pass4 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: Faker::Alphanumeric.alpha(number: 5))
+pass5 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_zero_number(digits: 10), password: Faker::Alphanumeric.alpha(number: 5))
 
 
-# Simulates a passenger requesting a ticket on the frontend
-# MATATU passengers
-matatu1.passengers << passenger1
-matatu1.passengers << passenger3
-matatu1.passengers << passenger2
+puts "Creating bookings..."
+booking1 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking2 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking3 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking4 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking5 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking6 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking7 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking8 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking9 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking10 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+booking11 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
 
-matatu2.passengers << passenger4
-matatu2.passengers << passenger5
 
-matatu3.passengers << passenger8
-matatu3.passengers << passenger6
+# Simulates a passenger requesting booking a ticket on the frontend
+# MATATU bookings
+matatu1.bookings << booking1
+matatu1.bookings << booking3
+matatu1.bookings << booking2
 
-matatu4.passengers << passenger7
+matatu2.bookings << booking4
+matatu2.bookings << booking5
+
+matatu3.bookings << booking8
+matatu3.bookings << booking6
+
+matatu4.bookings << booking7
+matatu4.bookings << booking9
+matatu4.bookings << booking10
+
+matatu5.bookings << booking11
 
 # Simulates a passenger requesting a ticket on the frontend
 # ROUTE passengers
-route1.passengers << passenger8
-route1.passengers << passenger7
+route1.bookings << booking8
+route1.bookings << booking7
 
-route2.passengers << passenger6
-route2.passengers << passenger5
+route2.bookings << booking6
+route2.bookings << booking5
 
-route3.passengers << passenger4
-route3.passengers << passenger3
+route3.bookings << booking4
+route3.bookings << booking3
+route3.bookings << booking11
 
-route4.passengers << passenger2
-route4.passengers << passenger1
+route4.bookings << booking2
+route4.bookings << booking9
+route4.bookings << booking10
+route4.bookings << booking1
 
 
 # PASSENGER tickets
-passenger1.tickets << ticket1
-passenger1.tickets << ticket2
+pass1.bookings << booking1
+pass1.bookings << booking2
 
-passenger2.tickets << ticket3
-passenger2.tickets << ticket4
+pass2.bookings << booking3
+pass2.bookings << booking4
 
-passenger3.tickets << ticket5
-passenger3.tickets << ticket6
+pass3.bookings << booking8
 
-passenger4.tickets << ticket8
+pass4.bookings << booking5
+pass4.bookings << booking6
 
-passenger5.tickets << ticket7
-passenger6.tickets << ticket9
-passenger7.tickets << ticket10
-passenger8.tickets << ticket11
+pass5.bookings << booking7
+pass5.bookings << booking9
+pass5.bookings << booking10
+pass5.bookings << booking11
 
 puts "🌱 Done seeding!"
