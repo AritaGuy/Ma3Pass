@@ -26,24 +26,15 @@ class ApplicationController < Sinatra::Base
       Matatu.find(params[:id]).to_json
   end
 
-#   # get all bookings
-#   get '/bookings' do
-#       Booking.all.to_json
-#   end
-
-#   # get one booking
-#   get '/bookings/:id' do
-#       Booking.find(params[:id]).to_json
-#   end
-
   # get all passengers
   get '/passengers' do
       Passenger.all.to_json
   end
 
+
   # get one passenger
   get '/passenger/:id' do
-      Booking.find(params[:id]).to_json
+      Passenger.find(params[:id]).to_json
   end
 
   # get all trips
@@ -57,21 +48,7 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  # crud for todo_lists ==================================
-
-
-#   # create
-#   post '/todo_list' do
-#       todo_list = TodoList.create(
-#           title: params[:title],
-#           description: params[:description],
-#           category_id: params[:category_id],
-#           status: false
-#       )
-#       todo_list.to_json
-#   end
-
-    # CREATE BOOKING
+    # CREATE a booking
     post '/booking' do
         booking = Booking.create(
             ticket_no: params[:ticket_no],
@@ -81,60 +58,34 @@ class ApplicationController < Sinatra::Base
         )
         booking.to_json
     end
-
-    # READ ALL BOOKINGS
+        
+    # READ ALL bookings
     get '/bookings' do
-        Booking.all.to_json(include: :passenger)
+        # booking = Booking.find(params[:id])
+
+        # booking.
+        Booking.all.to_json(only: [:id, :ticket_no], 
+                        include: { passenger: {only: [:id, :name, :phone], 
+                        include: { trips: {only: [:id, :departure, :destination, :time, :price], 
+                        include: { matatus: {only: [:id, :sacco, :reg_no]}}}}}}
+                        )
     end
 
+    #  READ ONE booking
+    get '/booking/:id' do
+        Booking.find(params[:id]).to_json(only: [:id, :ticket_no], 
+                                        include: { passenger: {only: [:id, :name, :phone], 
+                                        include: { trips: {only: [:id, :departure, :destination, :time, :price], 
+                                        include: { matatus: {only: [:id, :sacco, :reg_no]}}}}}}
+                                        )
+    end
 
-#   # read
-#   get '/todo_lists' do
-#       TodoList.all.to_json(include: :category)
-#   end
-
-#   # get one todo_list
-#   get '/todo_list/:id' do
-#       TodoList.find(params[:id]).to_json(include: :category)
-#   end
-
-#   # update
-#   patch '/todo_list/:id' do
-#       todo_list = TodoList.find(params[:id])
-#       todo_list.update(
-#           title: params[:title],
-#           description: params[:description],
-#           category_id: params[:category_id],
-#           status: params[:status]
-#       )
-#       {message: "Todo list updated!"}.to_json
-#   end
-
-#   # delete
-#   delete '/todo_list/:id' do
-#       todo_list = TodoList.find(params[:id])
-#       todo_list.destroy
-#       {message: "Todo List '#{todo_list.title}' has been deleted."}.to_json
-#   end
-
-
-
-  # abit of advanced stuffs huhh 😎 ===============================
-
-
-#   # get all todo_lists of a category
-#   get '/category/:id/todo_lists' do
-#       Category.find(params[:id]).todo_lists.to_json(include: :category)
-#   end
-
-#   # get all todo_lists of a category that are not completed
-#   get '/category/:id/todo_lists/active' do
-#       Category.find(params[:id]).todo_lists.where(status: false).to_json(include: :category)
-#   end
-
-#   # get all todo_lists of a category that are completed
-#   get '/category/:id/todo_lists/completed' do
-#       Category.find(params[:id]).todo_lists.where(status: true).to_json(include: :category)
-#   end
+    # DELETE ONE booking
+    delete '/booking/:id' do
+        booking = Booking.find(params[:id])
+        booking.destroy
+        {message: "Booking ticket number #{booking.ticket_no} has been deleted!"}.to_json
+    end
 
 end
+
