@@ -16,12 +16,15 @@ ActiveRecord::Schema.define(version: 2022_11_08_103500) do
     t.integer "ticket_no"
     t.integer "matatu_id"
     t.integer "passenger_id"
-    t.integer "route_id"
+    t.integer "trip_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "matatus", force: :cascade do |t|
     t.string "sacco"
     t.string "reg_no"
+    t.integer "capacity"
   end
 
   create_table "passengers", force: :cascade do |t|
@@ -30,8 +33,10 @@ ActiveRecord::Schema.define(version: 2022_11_08_103500) do
     t.string "password"
   end
 
-  create_table "routes", force: :cascade do |t|
-    t.string "name"
+  create_table "trips", force: :cascade do |t|
+    t.string "departure"
+    t.string "destination"
+    t.time "time"
     t.integer "price"
   end
 
