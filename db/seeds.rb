@@ -54,18 +54,18 @@ pass5 = Passenger.create(name: Faker::Name.name, phone: Faker::Number.leading_ze
 #   t.integer :trip_id
 #   t.timestamps
 # end
-puts "Creating bookings..."
-booking1 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking2 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking3 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking4 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking5 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking6 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking7 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking8 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking9 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking10 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
-booking11 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# puts "Creating bookings..."
+# booking1 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking2 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking3 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking4 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking5 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking6 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking7 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking8 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking9 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking10 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
+# booking11 = Booking.create(ticket_no: Faker::Number.number(digits: 3))
 
 
 # Bookings simulate associations after a passenger requests a ticket on the frontend

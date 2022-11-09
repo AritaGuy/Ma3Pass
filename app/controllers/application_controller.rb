@@ -22,7 +22,7 @@ class ApplicationController < Sinatra::Base
   end
 
   # get one matatu
-  get '/matatus/:id' do
+  get '/matatu/:id' do
       Matatu.find(params[:id]).to_json
   end
 
@@ -42,7 +42,7 @@ class ApplicationController < Sinatra::Base
   end
 
   # get one passenger
-  get '/passengers/:id' do
+  get '/passenger/:id' do
       Booking.find(params[:id]).to_json
   end
 
@@ -52,7 +52,7 @@ class ApplicationController < Sinatra::Base
   end
 
   # get one trip
-  get '/trips/:id' do
+  get '/trip/:id' do
       Trip.find(params[:id]).to_json
   end
 
@@ -84,7 +84,7 @@ class ApplicationController < Sinatra::Base
 
     # READ ALL BOOKINGS
     get '/bookings' do
-        Booking.all.to_json
+        Booking.all.to_json(include: :passenger)
     end
 
 
