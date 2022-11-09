@@ -9,6 +9,7 @@ services:
   # Create the web server hosting sinatra
   - type: web
     name: sinatra-web
+    plan: free
     env: ruby
     buildCommand: bundle install
     startCommand: rake server
