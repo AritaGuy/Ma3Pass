@@ -53,8 +53,7 @@ class ApplicationController < Sinatra::Base
         booking = Booking.create(
             ticket_no: params[:ticket_no],
             matatu_id: params[:matatu_id],
-            passenger_id: params[:passenger_id],
-            trip_id: params[:trip_id]
+            passenger_id: params[:passenger_id]
         )
         booking.to_json
     end
@@ -66,8 +65,7 @@ class ApplicationController < Sinatra::Base
         # booking.
         Booking.all.to_json(only: [:id, :ticket_no], 
                         include: { passenger: {only: [:id, :name, :phone], 
-                        include: { trips: {only: [:id, :departure, :destination, :time, :price], 
-                        include: { matatus: {only: [:id, :sacco, :reg_no]}}}}}}
+                        include: { matatus: {only: [:id, :sacco, :reg_no]}}}}
                         )
     end
 
@@ -75,8 +73,7 @@ class ApplicationController < Sinatra::Base
     get '/booking/:id' do
         Booking.find(params[:id]).to_json(only: [:id, :ticket_no], 
                                         include: { passenger: {only: [:id, :name, :phone], 
-                                        include: { trips: {only: [:id, :departure, :destination, :time, :price], 
-                                        include: { matatus: {only: [:id, :sacco, :reg_no]}}}}}}
+                                        include: { matatu: {only: [:id, :sacco, :reg_no]}}}}
                                         )
     end
 
