@@ -1,10 +1,10 @@
 services:
   # Create a redis instance
-  # - type: redis
-  #   name: sidekiq-redis
-  #   region: ohio
-  #   maxmemoryPolicy: noeviction
-  #   ipAllowList: []
+  - type: redis
+    name: sidekiq-redis
+    # region: ohio
+    maxmemoryPolicy: noeviction
+    ipAllowList: []
 
   # Create the web server hosting sinatra
   - type: web
@@ -13,9 +13,9 @@ services:
     env: ruby
     buildCommand: bundle install
     startCommand: rake server
-    # envVars:
-    #   - key: REDIS_URL
-    #     fromService:
-    #       type: redis
-    #       name: sidekiq-redis
-    #       property: connectionString
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: sidekiq-redis
+          property: connectionString
