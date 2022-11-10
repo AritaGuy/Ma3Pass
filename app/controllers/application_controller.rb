@@ -38,13 +38,13 @@ class ApplicationController < Sinatra::Base
   end
 
   # get all trips
-  get '/trips' do
-      Trip.all.to_json
+  get '/routes' do
+      Route.all.to_json
   end
 
   # get one trip
-  get '/trip/:id' do
-      Trip.find(params[:id]).to_json
+  get '/route/:id' do
+      Route.find(params[:id]).to_json
   end
 
 
